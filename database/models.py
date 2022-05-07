@@ -1,6 +1,5 @@
 from tokenize import Floatnumber
-from venv import create
-from database import Base
+from database.database import Base
 from sqlalchemy import Column,Integer,Boolean,Text,String,ForeignKey,DateTime,Numeric,Float
 from sqlalchemy.orm import relationship
 from sqlalchemy_utils.types import ChoiceType

@@ -3,9 +3,9 @@ from urllib import response
 from fastapi import APIRouter,Depends,status,Request
 from fastapi.exceptions import HTTPException
 from fastapi_jwt_auth import AuthJWT
-from models import Restaurant, User,Order,Fooditem
-from schemas import OrderModel,OrderStatusModel,RestaurantModel, RestaurantSearchModel,FoodItemModel
-from database import Session , engine
+from database.models import Restaurant, User,Order,Fooditem
+from database.schemas import OrderModel,OrderStatusModel,RestaurantModel, RestaurantSearchModel,FoodItemModel
+from database.database import Session , engine
 from fastapi.encoders import jsonable_encoder
 
 fooditem_router=APIRouter(

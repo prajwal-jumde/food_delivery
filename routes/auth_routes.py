@@ -3,9 +3,9 @@ import imp
 from click import exceptions
 from fastapi import APIRouter,status,Depends
 from fastapi.exceptions import HTTPException
-from database import Session,engine
-from schemas import SignUpModel,LoginModel,UserAddressModel
-from models import User,UserAddress
+from database.database import Session,engine
+from database.schemas import SignUpModel,LoginModel,UserAddressModel
+from database.models import User,UserAddress
 from fastapi.exceptions import HTTPException
 from werkzeug.security import generate_password_hash , check_password_hash
 from fastapi_jwt_auth import AuthJWT

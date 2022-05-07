@@ -3,7 +3,7 @@ import string
 from pydantic import BaseModel
 from typing import Optional
 
-from models import Fooditem
+from database.models import Fooditem
 
 
 class SignUpModel(BaseModel):

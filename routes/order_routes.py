@@ -2,12 +2,12 @@ from urllib import response
 from fastapi import APIRouter,Depends,status
 from fastapi.exceptions import HTTPException
 from fastapi_jwt_auth import AuthJWT
-from models import Fooditem, Restaurant, User,Order, UserAddress
-from schemas import OrderModel,OrderStatusModel
-from database import Session , engine
+from database.models import Fooditem, Restaurant, User,Order, UserAddress
+from database.schemas import OrderModel,OrderStatusModel
+from database.database import Session , engine
 from fastapi.encoders import jsonable_encoder
 import geopy
-import common as constants
+import utility.common as constants
 
 
 order_router=APIRouter(

@@ -1,10 +1,10 @@
 from fastapi import FastAPI
-from auth_routes import auth_router
-from order_routes import order_router
-from fooditem_routes import fooditem_router
-from restaurants_routes import restaurants_router
+from routes.auth_routes import auth_router
+from routes.order_routes import order_router
+from routes.fooditem_routes import fooditem_router
+from routes.restaurants_routes import restaurants_router
 from fastapi_jwt_auth import AuthJWT
-from schemas import Settings
+from database.schemas import Settings
 import inspect, re
 from fastapi import FastAPI
 from fastapi.routing import APIRoute
