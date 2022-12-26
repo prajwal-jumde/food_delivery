@@ -7,13 +7,18 @@
 - Create your virtualenv with `Pipenv` or `virtualenv` and activate it.
 - Install the requirements with ``` pip install -r requirements.txt ```
 - Set Up your PostgreSQL database and set its URI in your ```database.py```
+- Set Up your sqlalchemy.url in your ```alembic.ini```
 ```
 engine=create_engine('postgresql://postgres:<username>:<password>@localhost/<db_name>',
     echo=True
 )
 ```
 
-- Create your database by running ``` python init_db.py ```
+- Create your database by running 
+``` alembic revision --autogenerate -m "initial commit" ```
+- Create new migration with (not mandateory)
+```alembic revision -m "create/alter/delete changes"```
+```alembic upgrade head ```
 - Finally run the API
 ``` uvicorn main:app ``
 

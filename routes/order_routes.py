@@ -6,7 +6,7 @@ from database.models import Fooditem, Restaurant, User,Order, UserAddress
 from database.schemas import OrderModel,OrderStatusModel
 from database.database import Session , engine
 from fastapi.encoders import jsonable_encoder
-import geopy
+from geopy.distance import geodesic
 import utility.common as constants
 
 
@@ -53,22 +53,22 @@ async def place_an_order(order:OrderModel,Authorize:AuthJWT=Depends()):
         #  check if restautant is within 5km radius of the restaurant
         coords_1 = (address.lat, address.long)
         coords_2 = (restaurant_obj.lat, restaurant_obj.long)
-        distance = geopy.distance.geodesic(coords_1, coords_2).km
+        print('coords_1',coords_1 , coords_2)
+        distance = geodesic(coords_1, coords_2).km
         
-        if distance >=5:
-            delivery_charges = fooditem_obj.price + constants.NORMAL_DELIVERY
+        if distance <=5:
+            delivery_charges = constants.NORMAL_DELIVERY
         else:
-            delivery_charges = fooditem_obj.price + constants.DISTANT_DELIVERY
-
-        
-         
+            delivery_charges = constants.DISTANT_DELIVERY
+        print('distance',distance)
+        print('delivery_charges',delivery_charges)
         # TODO calculating order cost
         order_total = fooditem_obj.price * order.quantity
-        order_discount = fooditem_obj.discount * order.quantity
-
+        order_discount = fooditem_obj.discount
+        print('order_discount',order_discount)
         # TODO taxes and delivery charges calculation
         total_payable = (order_total - order_discount)+delivery_charges + order.surge_charge
-
+        print('total_payable',total_payable)
         new_order=Order(
             portion_size=order.portion_size.upper(),
             quantity=order.quantity
@@ -79,6 +79,7 @@ async def place_an_order(order:OrderModel,Authorize:AuthJWT=Depends()):
         new_order.order_total=order_total
         new_order.discount=order_discount
         new_order.total_payable=total_payable
+        new_order.address_id = order.address_id
         session.add(new_order)
         session.commit()
 

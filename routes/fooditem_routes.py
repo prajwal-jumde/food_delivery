@@ -46,7 +46,7 @@ async def add_fooditem(fooditem:FoodItemModel,Authorize:AuthJWT=Depends()):
             )            
         new_fooditem=Fooditem(
             name=fooditem.name,
-            restaurant_name=fooditem.restaurant,
+            restaurant_name=fooditem.restaurant_name,
             price=fooditem.price,
             discount=fooditem.discount,
             is_out_of_stock=fooditem.is_out_of_stock
@@ -76,7 +76,7 @@ async def add_fooditem(fooditem:FoodItemModel,Authorize:AuthJWT=Depends()):
 
 
 @fooditem_router.get('')
-@fooditem_router.get('{id}')
+@fooditem_router.get('/{id}')
 async def list_all_fooditem(request:Request,Authorize:AuthJWT=Depends(),id:int=0 ):
     """
         ## List all fooditem

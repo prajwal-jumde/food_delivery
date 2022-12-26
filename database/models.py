@@ -61,8 +61,8 @@ class Order(Base):
     __tablename__='orders'
     id=Column(Integer,primary_key=True)
     quantity=Column(Integer,nullable=False)
-    order_status=Column(ChoiceType(choices=ORDER_STATUSES),default="PENDING")
-    portion_size=Column(ChoiceType(choices=PORTION_SIZES),default="SMALL")
+    order_status=Column(String(255),default="PENDING")
+    portion_size=Column(String(255),default="SMALL")
     user_id=Column(Integer,ForeignKey('user.id'))
     user=relationship('User',back_populates='orders')
     restaurants = relationship('Restaurant',back_populates='orders')
